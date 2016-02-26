@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>autoPlay</title>
+	<style>
+		img {
+			width:490px;
+			height:170px;
+		}
+		ul {
+			list-style: none;
+			position: absolute;
+			text-align: center;
+			left:330px;
+			top:130px;
+		}
+		.small {
+			width:490px;
+			height:170px;
+			overflow:hidden;
+			position:relative;
+			margin:200px auto;
+		}
+		.big {
+			width:2450px;
+			height:170px;
+			position:absolute;
+		}		
+		.num li {
+			width:20px;
+			height:20px;
+			margin:0 3px;
+			border-radius:50%;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<div class="small">
+		<div class="big" style="left:0;height:0;">
+			<img src="img/01.jpg" alt="">
+			<img src="img/02.jpg" alt="">
+			<img src="img/03.jpg" alt="">
+			<img src="img/04.jpg" alt="">
+		</div>
+		<ul class="num">
+			<li style="background:red">1</li>
+			<li style="background:green">2</li>
+			<li style="background:green">3</li>
+			<li style="background:green">4</li>
+		</ul>
+	</div>
+</body>
+<script>
+	var big = document.getElementsByClassName("big")[0];
+	var li = document.getElementsByClassName("num")[0].getElementsByTagName("li");
+	var time = 0;
+	var timer = setInterval(function(){
+		li[time].style.background = "green";
+		time++;
+		if(time == 4)time = 0;
+		big.style.left = time* -490 + "px";
+		li[time].style.background = "red";
+	},2000)
+</script>
+</html>
