@@ -6,6 +6,8 @@ window.onload = function(){
 	var pre = document.getElementById("pre");
 	var next = document.getElementById("next");
 	var index = 1;
+	var animated = false; //缓存优化
+	var timer;
 
 	//按钮显示
 	function showButton(){
@@ -20,6 +22,7 @@ window.onload = function(){
 
 	//图片切换
 	function animate(offset) {
+		animated = true;
 		var newLeft = parseInt(list.style.left );
 		var time = 300;//位移时间
 		var interval = 10;//位移间隔时间
@@ -31,12 +34,13 @@ window.onload = function(){
 				list.style.left = parseInt(list.style.left ) + speed +"px";
 				setTimeout(go,interval);
 			} else {
+				animated = false;
 				list.style.left = newLeft + offset + "px" ;
 
-				if(newLeft > -700){	
+				if(left > -700){	
 					list.style.left = -3500+"px";
 				}
-				if(newLeft < -3500){
+				if(left < -3500){
 					list.style.left = -700+"px";
 				}
 			}
@@ -44,6 +48,13 @@ window.onload = function(){
 		go();
 		
 	}
+	//自动切换
+	function play(){
+		timer = setInterval(function(){
+			next.onclick();
+		},300)
+	}
+
 	next.onclick = function() {
 		if(index == 5) {
 			index=1;
@@ -51,7 +62,9 @@ window.onload = function(){
 			index +=1;
 		}		
 		showButton();
+		if(!animated){
 		animate(-700);
+		}
 	}
 	pre.onclick = function(){		
 		if(index == 1) {
@@ -60,7 +73,9 @@ window.onload = function(){
 			index -=1;
 		}
 		showButton();
+		if(!animated){
 		animate(+700)
+		}
 	}
 
 	//点击按钮
