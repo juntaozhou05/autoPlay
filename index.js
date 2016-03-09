@@ -52,7 +52,11 @@ window.onload = function(){
 	function play(){
 		timer = setInterval(function(){
 			next.onclick();
-		},300)
+		},2000);
+	}
+
+	function stop(){
+		clearInterval(timer);
 	}
 
 	next.onclick = function() {
@@ -91,6 +95,9 @@ window.onload = function(){
 			showButton();
 		}
 	}
+	play();
+	container.onmouseout = play;
+	container.onmouseover = stop;
 }
 
 
